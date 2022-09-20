@@ -13,7 +13,6 @@ where `r` and `c` represent the row and column, respectively, where a
 queen must be placed on the chessboard.
 """
 import sys
-'''Module for N Queens problem.'''
 
 
 def init_board(n):
@@ -46,8 +45,6 @@ def xout(board, row, col):
     """X out spots on a chessboard.
     All spots where non-attacking queens can no
     longer be played are X-ed out.
-def isSafe(board, row, col):
-    '''Checks if position is safe from attack.
     Args:
         board (list): The current working chessboard.
         row (int): The row where a queen was last played.
@@ -97,18 +94,6 @@ def isSafe(board, row, col):
 
 def recursive_solve(board, row, queens, solutions):
     """Recursively solve an N-queens puzzle.
-        board: The board state.
-        row: The row to check.
-        col: The colum to check.
-    '''
-    for c in range(col):
-        if board[c] is row or abs(board[c] - row) is abs(c - col):
-            return False
-    return True
-
-
-def checkBoard(board, col):
-    '''Checks the board state column by column using backtracking.
     Args:
         board (list): The current working chessboard.
         row (int): The current working row.
@@ -131,34 +116,15 @@ def checkBoard(board, col):
 
     return (solutions)
 
-        board: The board state.
-        col: The current colum to check.
-    '''
-    n = len(board)
-    if col is n:
-        print(str([[c, board[c]] for c in range(n)]))
-        return
-
-    for row in range(n):
-        if isSafe(board, row, col):
-            board[col] = row
-            checkBoard(board, col + 1)
 
 if __name__ == "__main__":
-    import sys
-
     if len(sys.argv) != 2:
         print("Usage: nqueens N")
         sys.exit(1)
     if sys.argv[1].isdigit() is False:
-    n = 0
-    try:
-        n = int(sys.argv[1])
-    except:
         print("N must be a number")
         sys.exit(1)
     if int(sys.argv[1]) < 4:
-    if n < 4:
         print("N must be at least 4")
         sys.exit(1)
 
@@ -166,5 +132,3 @@ if __name__ == "__main__":
     solutions = recursive_solve(board, 0, 0, [])
     for sol in solutions:
         print(sol)
-    board = [0 for col in range(n)]
-    checkBoard(board, 0)
